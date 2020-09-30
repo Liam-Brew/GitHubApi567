@@ -1,5 +1,6 @@
 import unittest
 from github_api import GitHubAPI
+unittest.TestLoader.sortTestMethodsUsing = None
 
 class TestGitHubAPI(unittest.TestCase):
 
@@ -9,7 +10,7 @@ class TestGitHubAPI(unittest.TestCase):
     
     def test_get_repos_names(self):
         gh = GitHubAPI("Liam-Brew")
-        self.assertEqual(gh.get_repos(), "['CS-135', 'CS-284', 'GitHubApi567', 'SSW-215', 'SSW-322', 'SSW-345', 'SSW-567', 'Triangle567']", 'CS-135', 'CS-284', 'GitHubApi567', 'SSW-215', 'SSW-322', 'SSW-345', 'SSW-567', 'Triangle567')
+        self.assertEqual(gh.get_repos(), ['CS-135', 'CS-284', 'GitHubApi567', 'SSW-215', 'SSW-322', ['SSW-345', 'SSW-567', 'Triangle567'], 'CS-135', 'CS-284', 'GitHubApi567', 'SSW-215', 'SSW-322', 'SSW-345', 'SSW-567', 'Triangle567'])
 
     def test_specific_get_commits(self):
         gh = GitHubAPI("Liam-Brew")
@@ -26,7 +27,7 @@ class TestGitHubAPI(unittest.TestCase):
 
     def test_403(self):
         gh = GitHubAPI("Liam-Brew")
-        for i in range(10):
+        for i in range(61):
             gh.run()
         self.assertEqual(gh.run(), 403, "Too many requests have been performed")
 
