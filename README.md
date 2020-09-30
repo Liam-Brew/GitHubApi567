@@ -9,3 +9,4 @@ When designing this code I thought it was very important for HTTP response codes
 ## Challenges
 
 The most difficult challenge I encountered was dealing with the API request cap. This impacted both the development and testing stages of writing this program. A major impact of this was constraining the possible test cases that I could implement, which decreased my testing coverage.
+
