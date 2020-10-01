@@ -1,6 +1,5 @@
 import unittest
 from github_api import GitHubAPI
-unittest.TestLoader.sortTestMethodsUsing = None
 
 class TestGitHubAPI(unittest.TestCase):
     
