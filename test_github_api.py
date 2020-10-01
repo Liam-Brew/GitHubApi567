@@ -14,6 +14,7 @@ class TestGitHubAPI(unittest.TestCase):
 
     def test_specific_get_commits(self):
         gh = GitHubAPI("Liam-Brew")
+        gh.get_repos()
         commits = gh.get_commits()
         self.assertEqual(commits['CS-135'], 6, 'Repo CS-135 should have 6 commits')
 
