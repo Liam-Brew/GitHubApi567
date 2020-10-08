@@ -1,6 +1,6 @@
-# SSW567 Homework 04a
+# SSW567 Homework 05a
 
-[![build status of master](https://travis-ci.org/Liam-Brew/GitHubApi567.svg?branch=master)](https://travis-ci.org/Liam-Brew/GitHubApi567)
+[![build status of HW05a_Mocking](https://travis-ci.org/Liam-Brew/GitHubApi567.svg?branch=HW05a_Mocking)](https://travis-ci.org/Liam-Brew/GitHubApi567)
 
 **Author**: Liam Brew
 
@@ -10,24 +10,18 @@
 
 ## Assignment Description
 
-This assignment will require that you write code to interface with an external REST-based APIs.   We could have used almost any external APIs, but for this assignment we chose GitHub because many of its APIs are public and do not require any authorization or API Keys.   This simplifies both the use and setup.
+In last week's assignment HW 04a you may have encountered problems when testing your code in Travis-CI given that your tests were highly dependent on the GitHub APIs. Those APIs would start to return errors if you exceeded a threshold on use, or those APIs would return different results if you make a change to your repos. Remember that one of the key concepts behind unit-tests was that if you don't change your program then the unit-tests should behave consistently. Unfortunately that is not the case so far.
 
+In this assignment you will use a mocking package to "mock" your program's external dependence on GitHub, so that you can guarantee that your unit tests will run consistently ever time you run them, no matter how many times you run them, and no matter what changes you make to your repos.
 
-For this assignment imagine that you have been asked to develop a function that will interface with GitHub in order to extract and present useful information to your user. The function will communicate using the RESTful services APIs provided by GitHub. The GitHub APIs will allow you to query for information about users, repositories, etc... which can be retrieved using the function, and then be displayed in the application.
+## Summary of Work
 
-What should make this assignment different from other programming assignments is in how you will approach it.  You should approach this assignment as a developer who more than anything else has the perspective of the tester in the front of your mind. 
-
-The developer looks at the requirements and asks how should I design and implement this function, but the tester will ask questions such as what will I need to test for in this function?  And how will I test this function?   As you design and write the function as a developer, you should consider the perspective of the tester in any of your design and implementation decisions.   One deliverable of this assignment will be to reflect and comment on this.
-
-## Summary of Work/Design Strategy
-
-When designing this code I thought it was very important for HTTP response codes to be maintained. I felt that this would give significant insight regarding the status of the program and assist in troubleshooting any errors. To manage this, I included the two global variables ```repo_status``` and ```commit_status``` and based my class's ```run()``` method on interpreting these statuses. An added benefit of monitoring these statuses in such a way was that it enabled early termination  in case of an API failure, increasing the efficiency of the program. For my unit testing, I tried to balance the testing of the API endpoints by looking at a mix of both status codes and the content returned.
+Luckily I had built my main github_api.py program to incorporate HTTP response codes, so this made my mocking progress somewhat easier. I was able to successful mock all API calls, whether they returned HTTP response codes or actual data.
 
 ## Challenges
 
-The most difficult challenge I encountered was dealing with the API request cap. This impacted both the development and testing stages of writing this program. A major impact of this was constraining the possible test cases that I could implement, which decreased my testing coverage.
+I ran into some challenges when mocking tests that returned actual data (ex: the repo list). This is because I initially failed to account for my class-based structure. Once I revised my patch structure for the tests that referenced specific methods (ex: get_repos()) my tests seem to work ok without relying on the API.
 
 ## Reflection
 
-I found this assignment to be very useful and the premise to be interesting. Often times when I am writing code, I do not really consider the testing implications of certain design decisions and instead seek to focus on the immediate efficiency of the development process. When I was working on this assignment, I tried my best to make the code as portable and specific as possible. This explains my object-oriented approach wherein I grouped related functions, each with a specific task to play a role in the larger system. I found this especially useful when working with the HTTP return calls, which was a specific goal of mine when considering the tester. The management of these calls enabled me to see exactly where the program failed and due to what reasons, which definitely helped the testing phase of development.
-
+I found this assignment interesting as the API call limit was a significant challenge for me to overcome in Homework 04. Using mock, this problem is completely circumnavigated.
